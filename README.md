@@ -1,79 +1,14 @@
 Build System
-Contents
-1. System's purpose	3
-2. General principles of implementation	3
-3.Build Machine's command prompt	3
-4. Set up Build Machine	5
-5. Create descriptions/definitions of the projects	6
-5.1 XML structure of the document with project description	7
-5.1.1 „Var“ nodes	8
-5.1.2 „File“ nodes	8
-5.1.3 „Target” nodes	9
-5.1.4 „Solution” nodes	9
-6. Project 	19
-7. Scripting	21
-7.1 XML document structure with script	22
-7.1.1. “Var” nodes	24
-7.1.2 “File” nodes	25
-7.1.3 “Macrodef” nodes	25
-7.1.4 “Include” node	27
-7.1.5 List of tasks to be performed	27
-7.2 Global variables which affect the execution of scripts	27
-7.3 Examples	29
-8. Usage of variables	31
-9. Usage of expressions	34
-10. List of standard tasks to build a script	36
-10.1 „MessageBox“ task	36
-10.2 “Question” task	37
-10.3 „Build” task	38
-10.4 “Libs” task	40
-10.5 ”Exec” task	43
-10.6 ”System” task	44
-10.7 ”SvnUpdate” task	45
-10.8 “SvnCommit“ task	46
-10.9 “SvnCleanup“ task	47
-10.10 “SvnRevisionNum“ task	48
-10.11 “SvnRevert” task	49
-10.12 “VersionFileRead” task	50
-10.13 “VersionFileWrite” task 	50
-10.14 “SetProjectVersion” task	51
-10.15 “LoadProperties“ task	54
-10.16 “SetVar“ task	55
-10.17 “Echo“ task	56
-10.18 “MkDir“ task	56
-10.19 “SetCurrDir“ task	57
-10.20 ”Copy”  task	58
-10.21 “Delete“ task	60
-10.22 “Rename“ task	61
-10.23 “ForEach“ task	62
-10.24 “Break“ task	63
-10.25 “Сontinue“ task	64
-10.26 “WriteFile“ task	65
-10.27 ”WinRegRead” task	66
-10.28 “WinRegWrite“ task	68
-10.29 “WinRegDelete“ task	69
-10.30 “Exit“ task	71
-10.31 “ExpandSysVar“ task	72
-10.32 “Dialog“ task	72
-10.33 “Sound“ task 	76
-10.34 “PrintVars“ task	77
-10.35 “PrintProjects“ task 	78
-11. Short list of tasks	79
-12. List of operators	80
-13. List of global variables	83
-14. List of functions	85
-15. Licence agreement	93
-16. Source code	94
-17. Contact developers	94
-18. TO-DO	95
 
 1.  System's purpose
 This paper describes a new automated system for project building. The system is intended primarily for software developers. The system is designed to construct and build projects on different operating systems and using different development environments.
+
 2.  General principles of implementation
 Current version of automated system for project  (Build Machine) has been built in accordance with the following principles:
 Each project must have a Build Project File, containing the necessary information on the  of the project. For example, a unique name of the project, dependence on other projects and libraries, methods of , etc. Thus, the entire repository should be marked by the project description files to provide unambiguous information on the projects and their dependencies.
 Build Machine must be able to perform different actions (project , external applications launch, file copying, etc.) which are needed to build a product. Build Machine should provide an opportunity to create flexible scripting actions on  projects. In this case , all operations with projects should be carried out on the basis of information that Build Machine derives from the project description files.
 At the moment Build Project File uses am XML-file in the format described below. XML file is also used as a Job File.
+
 3.Build Machine's command prompt
 Right after its launch, Build Machine usually scans the repository and builds a full tree of projects with all their dependencies on the basis of Build Project File. Right after scanning the Build Machine starts to execute tasks that can be specified on the command line. 
 The name for executable file for Build Machine is nbuilder.exe (for Windows).
@@ -102,6 +37,7 @@ Build a list of tasks from Job File, specified on the command line ( key «/ job
 Building of a list of tasks from the command line ( using key «/ build» in this case to build a project )
 Repository will be scanned to build a tree of projects with all dependencies. Scanning directory will be defined as follows.  If the parameter «/ pmanifest» is specified, the scan will be conducted in the folder of the file (defined by «/ pmanifest»). If the value of the parameter «/ pmanifest» is not specified and the value of svn.repository.dir contains the directory, the scan will be carried out in this directory . Otherwise, Build Machine will start scanning Build Project File in the directory, where the executable is located
 List of tasks is executed.
+
 4. Set up Build Machine
 The main way to configure Build Machine is to use environment variables from Properties file and script files.
 As mentioned above, at its start Build Machine tries to load the list of variables from the files with already predetermined names («build.properties» and «build.properties.base»). These files generally contain the most common and important parameters.
@@ -120,6 +56,7 @@ qt.linguist=${qt.dir}bin\linguist.exe
 Where
 # - symbol is the beginning of the comment line
 ${...} value for an already defined variable (see Usage of Variables). Besides, global variables set in the beginning of work with Build Machine, can also be used.
+
 5. Create descriptions/definitions of the projects
 Usually, Build Machine tries to collect all information about project before performing any task. This information is then used during the work with projects (for example, during building of the projects, library copying, projects' versions editing, …). To get information about the projects, Build Machine scans directories with initial code, finds the files with project descriptions (Build Project File) and builds a detailed project tree with its dependencies based on this information. Build Machine tries to get the following information for each project:
 1. Type of the project. At present there are two kinds of projects:
