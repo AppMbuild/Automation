@@ -1,9 +1,9 @@
 Build System
 
-1.  System's purpose
+1. System's purpose
 This paper describes a new automated system for project building. The system is intended primarily for software developers. The system is designed to construct and build projects on different operating systems and using different development environments.
 
-2.  General principles of implementation
+2. General principles of implementation
 Current version of automated system for project  (Build Machine) has been built in accordance with the following principles:
 Each project must have a Build Project File, containing the necessary information on the  of the project. For example, a unique name of the project, dependence on other projects and libraries, methods of , etc. Thus, the entire repository should be marked by the project description files to provide unambiguous information on the projects and their dependencies.
 Build Machine must be able to perform different actions (project , external applications launch, file copying, etc.) which are needed to build a product. Build Machine should provide an opportunity to create flexible scripting actions on  projects. In this case , all operations with projects should be carried out on the basis of information that Build Machine derives from the project description files.
@@ -41,21 +41,6 @@ List of tasks is executed.
 4. Set up Build Machine
 The main way to configure Build Machine is to use environment variables from Properties file and script files.
 As mentioned above, at its start Build Machine tries to load the list of variables from the files with already predetermined names («build.properties» and «build.properties.base»). These files generally contain the most common and important parameters.
-The structure of Properties file is standard. It is a text file and each Property is set in a separate line. Here is an example:
-
-# --------------------------------------------------
-# My description
-# --------------------------------------------------
-repository.dir=”d:\svn\”
-qt.dir=”D:\Qt\Qt5.1.0\5.1.0\msvc2010\”
-qt.bin.dir=${qt.dir}bin\
-msbuild.dir=”C:\Windows\Microsoft.NET\Framework\v4.0.30319\”
-msbuild.exe=${msbuild.dir}MSBuild.exe
-qt.linguist=${qt.dir}bin\linguist.exe
-
-Where
-# - symbol is the beginning of the comment line
-${...} value for an already defined variable (see Usage of Variables). Besides, global variables set in the beginning of work with Build Machine, can also be used.
 
 5. Create descriptions/definitions of the projects
 Usually, Build Machine tries to collect all information about project before performing any task. This information is then used during the work with projects (for example, during building of the projects, library copying, projects' versions editing, …). To get information about the projects, Build Machine scans directories with initial code, finds the files with project descriptions (Build Project File) and builds a detailed project tree with its dependencies based on this information. Build Machine tries to get the following information for each project:
