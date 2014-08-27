@@ -1,3 +1,5 @@
+Download code at http://appmiracle.com/appm-build-automation
+
 Build System
 
 1. System's purpose
@@ -71,190 +73,356 @@ A few words about how Build Machine scans directories to find the Build Project 
 The main node of the document has the name “Project”. List of attributes for the node “project”.
 
 Attribute name
-Description 
-Required
 version
+
+Description 
 Default value: «1.0»
+
+Required
 No
 
 List of subnodes for “project”:
 
+1.
 Node name
-Description
-Node number
 vars
+
+Description
 This node defines environmental variables. 
 This node does not contain attributes. 
 The node may comprise any number of nodes named “var”. “var” contains information about the variable.
+
+Node number
 Any
+
+2.
+Node name
 loadproperties
+
+Description
 This node defines Properties files.
 This node does not contain attributes. 
 The node may comprise any number of nodes named “file”.  “file” contains information about the files, that should be loaded.
+
+Node number
 Any
+
+3.
+Node name
 scan
+
+Description
 This node defines directories for further search of Build Project File.
 This node does not contain attributes. 
 The node may comprise any number of nodes named “targets“ (these nodes do not contain attributes).  In turn, “targets“ can contain any quantity of nodes with “target“ name. “Targets“ defines directories.
+
+Node number
 Not more than one
+
+4.
+Node name
 solutions
+
+Description
 This node defines projects.
 This node does not contain attributes. 
 The node may comprise any number of nodes named “solution“. “solution“ contains information about the project.
+
+Node number
 Not more than one
 
+
 Nodes “vars“, “loadproperties“ and “solutions“ are processed in the order they appear. Node “scan” is always processed first. Scanning in the directories, specified in “scan” can be made only after processing of the current file.
+
+
 5.1.1 „Var“ nodes
 „Var“ nodes contains following attributes 
 
+1.
 Attribute name
-Description 
-Required
 name
+
+Description 
 Name of variable
+
+Required
 Yes
+
+2.
+Attribute name
 value
+
+Description
 Value of the variable. 
-Is an empty string by default. 
+Is an empty string by default.
+
+Required
 No
+
+3.
+Attribute name
 replace
+
+Description
 If given as a “true”, “ok”, “yes” or “1”, then the value of the variable will be replaced by a value, defined in the “value” attribute.
 If given as “false”, “no” or “0” and such a variable already exists, the global variable will not change. 
 If given as “false”, “no” or “0” and there is no variable with such name, a new variable will be added.
 Is “false” by default.
+
+Required
 No
 
 This section allows to add (change) global variables. 
 In attribute values (“name”, “value”, “replace”) other variables can be used (see Usage of Variables).
+
+
 5.1.2 „File“ nodes
 „File“ node contains the following attributes
 
+1.
 Attribute name
-Description 
-Required
 file
+
+Description 
 Path to the Properties-file, from which the global variables will be loaded.
+
+Required
 Yes
+
+2.
+Attribute name
 replace
+
+Description
 If given as “true”, “ok”, “yes” or “1”, the variables from the file will replace the already existing variables.
 Is “false” by default.
+
+Required
 No
+
+3.
+Attribute name
 varprefix
+
+Description
 Prefix added to the beginning of the name of each variable, loaded from the file. 
 Is an empty string by default.
+
+Required
 No
 
 This section allows to add (change) global variables from Properties file.
 You can use value of previously defined variables as attribute values (see  Usage of Variables ).
+
+
 5.1.3 „Target” nodes
 „Target” node contains the following attributes:
 
+1.
 Attribute name
-Description 
-Required
 path
+
+Description 
 Directory
+
+Required
 Yes
+
+2.
+Attribute name
 enable
+
+Description 
 If given as “false”, “no” or “0”, the node will not be  processed
+
+Required
 No
 
 This section allows you to define the following directories in which Build Machine will scan project identifications (Build Project Files). 
 
-You can use value of previously defined variables as attribute values (see  Usage of Variables ).
+You can use value of previously defined variables as attribute values (see  Usage of Variables).
+
+
 5.1.4 „Solution” nodes
 Exactly this XML node defines the properties of the project used in Build Machine when working with the project.
 “Solution” node has the following attributes
 
+1.
 Attribute name
-Description 
-Required
 name
+
+Description 
 Name of the project. Must be unique.
+
+Required
 Yes
+
+2.
+Attribute name
 type
+
+Description
 Type of project. One of the following values: 
 „build“ - resulting project files can be obtained only after the  of the project.
 „files“ - this project is a set of ready -to-use files (the  of such a project is not needed).
+
+Required
 Yes
+
+3.
+Attribute name
 filter
-This is the text that can be used when searching for projects in the text filter. Usually used for additional classification of projects. 
+
+Description
+This is the text that can be used when searching for projects in the text filter. Usually used for additional classification of projects.
+
+Required
 No
+
+4.
+Attribute name
 solutiondir
+
+Description
 Path to the directory with the project.
+
+Required
 No
+
+5.
+Attribute name
 projectfile
+
+Description
 Path to the main project file.
+
+Required
 No
+
+6.
+Attribute name
 enable
+
+Description
 If given as “false”, “no” or “0”, this description is not to be used.
 “True” by default
+
+Required
 No
 
 “Solution” node can contain a subsidiary “output”. “output” node defines the list of resulting files, that will be created after project building as well as already existing files. “output” node can contain any quantity of “fileset” nodes. “fileset” node contains the following attributes:
- 
+
+1.
 Attribute name
-Description 
-Required
 dir
+
+Description 
 Files directory
+
+Required
 Yes
+
+2.
+Attribute name
 id
+
+Description 
 Identificator, which identifies the group of files declared inside the “fileset”.
 Build Machine allows to manipulate these files, finding them using their names or ID.
 The usage of IDs lets you copy groups of files, specified in different “filesets” to different directories (see Build Task). 
+
+Required
 No
+
+3.
+Attribute name
 condition
+
+Description
 Expression written using variables, operators and functions.  If given as “false”, “no” or “0”, this description is not to be used.
+
+Required
 No
 
 List of files inside «fileset» if defined by attributes in “include” node. “Include”node has the following attributes
 
+1.
 Attribute name
-Description 
-Required
 name
+
+Description 
 Defines the name of the file or the relative path toe the file (relative to the directory, specified in the “dir” or “fileset” attribute).
-If given as “*”, all the files from the directory, specified in the “dir” attribute of “fileset” node, will be used. 
+If given as “*”, all the files from the directory, specified in the “dir” attribute of “fileset” node, will be used.
+
+Required
 Yes
+
+2.
+Attribute name
 targetsubdir
+
+Description
 Subdirectory. If set, the system will always create this subdirectory in the output folder and place the output file into this subdirectory.
 For example, it can be used when describing certain third party dlls, which must be placed in certain directories.
+
+Required
 No
 
 Dependencies project list is described in the “dependencies” node (inside “solution”). “dependencies” node includes “dependence”, which define the names of the dependency projects. “Dependence” node contains the following attributes: 
 
 Attribute name
-Description 
-Required
 name
+
+Description 
 Name of the project, which the described project depends on.
+
+Required
 Yes
 
 Version number is usually placed in a separate file (or various files). During build of the projects, there is often a need to change the version number in these files. To do this automatically, Build Machine must know where the version files are placed. Therefore, there is a subsidiary node “versionfiles” (inside “solution”). “versionfiles” node can contain any quantity of “versionfile” nodes, which define the path to the file with the version. “versionfile” node contains the following attributes: 
 
+1.
 Attribute name
-Description 
-Required
 file
+
+Description 
 Absolute or relative (relative to the directory, where the project description file is placed) path to the file with version.
+
+Required
 Yes
+
+2.
+Attribute name
 id
+
+Description
 ID which identifies this file. ID is helpful in those cases, when the file contains various files with version. Build Machine lets lets to manipulate with these files, finding them by the name or ID.
+
+Required
 No
 
 Some product projects are destined for different kinds of platforms, for example x86, x64, etc. Moreover, many projects can be built in different environment, in which the name of the same platform varies. This is why during the  of a specific project there is always a need to explicitly specify the name of the used platform. When building a release, many projects can be build as subsidiary (if they determine the project, launched for building). In this case these subsidiary projects will be build in the environment, that was created to build the original project. To “on-the-fly” correct the name of the platform, that is going to be used during the project build, a node “platformmappings” can be used (inside “solution”). “platformmappings” can contain any ammount of subnodes “platformmapping” - these nodes will correct the name of the platform. Node “platformmapping” contains the following attributes: 
 
+1.
 Attribute name
-Description 
-Required
 from
+
+Description 
 Platform name, which will be replaced by the value from the attribute “to”, if the “platform” setpoint  (from the  environment) coincides with the value of this attribute.
 Can be an empty line.
+
+Required
 Yes
+
+2.
+Attribute name
 to
+
+Description
 Platform name, which will be used during the project build, if the specified “platform” value coincides with the “from” value.
 Can be an empty line.
+
+Required
 Yes
 
 We recall that Build Machine build projects using “Build” command (see Build task). To determine the type of the platform this task has a property “platform”.
@@ -540,46 +708,80 @@ This is the simplest example of the file, after processing of which a message �
 </project>
 
 Let's go on to the description of XML files structure with scripts.
+
 7.1 XML document structure with script
 The name of the main node is “project”. List of the attributes for “project” node are as follows:
 
 Attribute name
-Description 
-Required
 version
+
+Description
 Default value: “1.0”
+
+Required
 No
 
 List of subsequent nodes for “project”:
 
+1.
 Node name
-Description 
-Quantity of nodes
 vars
+
+Description 
 This site defined environment variables.
 This site does not contain attributes.
 A node can contain any quantity of sub-nodes with “var” name. “var” contains information about the variable.
+
+Quantity of nodes
 Any
+
+2.
+Node name
 loadproperties
+
+Description
 This node defines  “properties” files. 
 This node does not contain attributes.
 A node may comprise any number of sub-nodes with the name “file”. “file“ node contains information about the files that should be loaded.
+
+Quantity of nodes
 Any
+
+3.
+Node name
 includes
+
+Description
 This node defines other “Job Files” which must be processed before processing of other content.
 This node does not contain attributes. 
 The node may contain any quantity of sub-nodes with the name “include”. “include” defines the files that should be loaded.
 The file processing algorithm is the same as processing of the current file.
+
+Quantity of nodes
 Any
+
+4.
+Node name
 macrodefs
+
+Description
 This node defines the templates for repetitive tasks. Templates, described in this section, can be used in the “tasks” section.
 This node does not contain attributes. 
 Node can contain any quantity of sub-nodes with the name “macrodef”. “macrodef” contains description of the template.
+
+Quantity of nodes
 Not more than one
+
+5.
+Node name
 tasks
+
+Description
 This node contains tasks to be performed.
 This node does not contain attributes.  
 Node can contain any quantity of sub-nodes, described in the List of common tasks for creating scripts. Node can contain any quantity of tasks, described in “macrodef”.
+
+Quantity of nodes
 Not more than one
 
 All nodes thing the “project” are processed in the order they appear.
@@ -588,77 +790,141 @@ All nodes thing the “project” are processed in the order they appear.
 “Scan” node is always processed first. Scanning in the directories, specified in “scan” can be performed only after processing of the current file.
 The overall structure of the document is as follows:
 
-“vars” section defines additional variables
-“loadproperties“ section loads additional variables from “Properties” files
-“includes“ section loads the content from other scripts
-“macrodef” section defines templates and macros for repetitive tasks
-“Tasks” section defines the list of tasks
+- “vars” section defines additional variables
+- “loadproperties“ section loads additional variables from “Properties” files
+- “includes“ section loads the content from other scripts
+- “macrodef” section defines templates and macros for repetitive tasks
+- “Tasks” section defines the list of tasks
 
 To allow structure programming and to get rid of duplicates when writing repetitive sequences of tasks macros can be used. After definition the macros can be used in “tasks” section as a task.
+
 Macros are specified in the “macrodefs” section in “macrodef” node.
+
 Each “macrodef” must have a unique name, specifies in the “name” attribute. Macros name is the ID, later used as the name of the XML-node to find the macros.
+
 “Macrodef” node contains the following sub-nodes:
-attribute - for the definition of macros arguments (call parameters). Each such a node must have a “name” attribute. The quantity of “attribute” is not limited.
+
+- attribute - for the definition of macros arguments (call parameters). Each such a node must have a “name” attribute.
+
+The quantity of “attribute” is not limited.
+
 “Attribute” nodes should be viewed as a list of parameters to determine “macrodef”. The value of “name” attribute (“attribute” node) acts then as a list of parameters to identify “macrodef”. Value of the additional attributes can be used inside the “macrodef” in the notation of  @{parameter_name}.
+
 “Tasks“ -section (which can be only one) contains calls for “tasks” and predefined macros.
+
+
 7.1.1. “Var” nodes
 “Var” node contains the following attributes:
 
+1.
 Attribute name
-Description 
-Required
 name
+
+Description
 Name of variable
+
+Required
 Yes
+
+2.
+Attribute name
 value
+
+Description
 Value of the variable.
 Is an empty line by default
+
+Required
 No
+
+3.
+Attribute name
 replace
+
+Description
 If set as “true”, “ok”, “yes” or “1”, the value of the variable will be replaced by the value, set in “value” attribute.
 If set as “false”, “no” or “0” and there is already a variable with such a value, then the variable will not change.
 If set as “false”, “no” or “0” and there is no variable with such name, a new variable will be added.
 Is “False” by default.
+
+Required
 No
 
 This section allows to add (change) global variables.
 You can use the values of already defined variables as values of attributes (“name”, “value” and “replace”). For more information, see Usage of Variables.
+
+
 7.1.2 “File” nodes
 “File” node contains the following attributes:
 
+1.
 Attribute name
-Description 
-Required
 file
+
+Description 
 Path to Properties file, from which global variables will be loaded.
+
+Required
 Yes
+
+2.
+Attribute name
 replace
+
+Description
 If set as “true”, “ok”, “yes” or “1”, the variables of the file will be replaces by the already existing ones. 
 Is “false” by default.
+
+Required
 No
+
+3.
+Attribute name
 varprefix
+
+Description
 Prefix, which will be added to the beginning of each variable's name, loaded from the file.
 Is an empty line by default.
+
+Required
 No
 
 This section allows to add (change) global variables from Properties file.
 You can use the values of already defined variables as values of attributes. For more information, see Usage of Variables.
+
+
 7.1.3 “Macrodef” nodes
+
 To allow structured programming and to get rid of repetitions in repetitive sequences of tasks different macros are supported (macrodef, macroprototypes, templates). After the macros has been defined, it can be used in “task” section as a “task”. Macros can also be used in “tasks” section in other files with scripts.
+
 Macros are defined in “macrodefs” section using the node “macrodef”.
+
 Each “macrodef” must have a unique name, mentioned in the “name” attribute. Macros name is his ID, which will be used as the name of XML-node for search and launch.
+
 “Macrodef” node contains the following sub-nodes:
+
+1.
 Node name
-Description 
-Quantity of nodes
 attribute
+
+Description
 “Attribute“ nodes are used to define arguments (call parameters) of the macros. Each such a node must have a “name” attribute”. The quantity of “attribute” nodes is not limited. 
 “Attribute” nodes should be seen as a list of parameters for “macrodef”. The value of the “name” attribute (“attribute” node) can be later used as a name for an additional attribute for a new task. Values of these additional attributes can be used inside “macrodef” in the notation of  @{parameter_name}.
+
+Quantity of nodes
 Any
+
+2.
+Node name
 tasks
+
+Description
 This section (which can be only one) contains calls for “tasks” and predefined macros. Templates can use other previously determined templates (also from other files). Nesting level is not limited.
 This node doesn't contain attributes.
+
+Quantity of nodes
 Not more than one
+
 
 This is a simple example of a macros creation and using:
 
@@ -680,67 +946,116 @@ This is a simple example of a macros creation and using:
 </project>
 
 This example uses a template “myinfo”. The template “myinfo” has only one defined attribute “mymessage”. The value of the “mymessage” attribute (which can be taken from @{mymessage}) is used as a display message text. “Task” message calls to a previously defined template “myinfo”.
+
+
 7.1.4 “Include” node
 “Include” node contain the following attributes:
 
+1.
 Attribute name
-Description 
-Required
 file
+
+Description 
 Path to another file to the script
+
+Required
 Yes
+
+2.
+Attribute name
 replace
+
+Description 
 If given as “true”, “ok”, “yes” or “1”, the variables from the file will replace the already existing variables.
 Is “false” by default
+
+Required
 No
+
+3.
+Attribute name
 varprefix
+
+Description 
 Prefix which will be added in the beginning of each variable's name, loaded from the file.
 An empty line by default
+
+Required
 No
+
+Attribute name
 objprefix
+
+Description
 Prefix which can be added to the beginning of each macros name, loaded from the file.
 An empty line by default
+
+Required
 No
 
 A possibility to include other files with scenarios lets to create a correct structure of files. For example, general-purpose macros can be taken in a separate file, which will connect to other scripts.
+
+
 7.1.5 List of tasks to be performed
+
 Inside the “tasks” sections (“project” node)  there are nodes with tasks to perform. Among these nodes there can be “standard” tasks, which are described in the “List of standard tasks to create scripts” and macros. 
-Every atomic task is represented as a properly arranged XML section. It is recommended to use variables in the task attributes.
+
+Every atomic task is represented as a properly arranged XML section. It is recommended to use variables in the task 
+attributes.
+
 It is remarkable, that each task has an “condition” attribute, in which one can white statements of any complexity and use functions, comparison operators, variables and logic operators. “Condition” attribute defines if the task will be carried out.
+
 7.2 Global variables which affect the execution of scripts
 Below is the list of variables which affect the execution of tasks and project .
 
+1.
 Variable name
-Description 
 interrupt.tasks.on.error
+
+Description 
 If set as “false”, “no” or “0” - Build Machine will continue to work even in case error will occur during the performing of task.
 Is “True” by default
+
+2.
+Variable name
 interrupt.tasks
+
+Description 
 If set as “true”, “yes”, “ok” or “1” Build Machine will stop to perform tasks. Build Machine checks the value of this variable before performing of each task.
 Is “false” by default
+
+3.
+Variable name
 <project name>.prefer.out.subdir
+
+Description 
 Here the “<project name> “is the name of the project
 Is used to edit the directory, where the project build files will be copied (see Build task and Libs task)
 For example:
-
-
 FreeTorrentDownload.prefer.out.subdir=torrent
 
-
+4.
+Variable name
 <project name>.prefer.out.subdir.recursively
+
+Description 
 “True“ or “false“.
 Is used to edit the directory, where the project build files will be copied (see Build task and Libs task)
-For example:
+
+5.
+Variable name
 <project name>.<fileset id>.fileset.prefer.out.subdir
+
+Description 
 Is used to edit the directory, where the project build files will be copied (see Build task and Libs task)
+
 For example:
 The value of the <project name>.<fileset ID>.fileset.prefer.out.subdir variable can be a list, elements of which are separated by commas. Each element of the list is the subdirectory, which will be created inside the “output” directory. During processing of the project all resulting files defined within the “fileset” will be copied into these subdirectories.
+
 For example: 
 
 FreeTorrentDownload.abc.fileset.prefer.out.subdir=common
 curl.windows.abc.fileset.prefer.out.subdir=common,.,torrent
-
-
 
 To learn more about how to use variables read the corresponding chapter Usage of Variables.
 
@@ -800,7 +1115,9 @@ To learn more about how to use variables read the corresponding chapter Usage of
     </tasks>
 </project>
 
+
 8. Usage of variables
+ 
 Usage of variables allows to control the actions of Build Machine in the most convenient way as well as to eliminate double work when composing same texts. 
 
 “Build Machine“ keeps a big range of variables in its memory, each variable contains a name and value. The name and the value of the variable is a text. Name of the variable must be unique. “Build Machine” compares names of variables case-insensitively.  
@@ -891,26 +1208,31 @@ In Job File it is also possible to use Macrodef variables and “local” variab
 Local variables (see, for example, “ForEach” task) can be used only when writing some tasks. To access local variables “#{variable_name}” syntax is used. Lifetime of local variables is limited by the time of task execution.
 
 Build Machine allows to use various functions and operations to set values for variables. Job Files provide usage of a special task “SetVar” (see “SetVar” task),  which provides ability to calculate the variables based on expressions of any complexity.
+
+
 9. Usage of expressions
 When writing Build Project Files, Job Files it is possible to use expressions. Usage of expressions makes project descriptions and creation of scripts flexible.
 
 In the expressions you can use:
-Comparison operations “==“, “eq“, “!=“, “noteq“, “less“, “eless“, “great“ and “egreat“ (see List of operators)
-Logical operations “and” and “or” (see List of operators)
-Unary operations “!” and “not” (see List of operators)
-Functions. List of functions and their descriptions, see List of functions. Note that Build Machine is case-insensitive when comparing the names of the functions.
-Variables (see Usage of Variables). Build Machine is case-insensitive when comparing the names of the variables.
+- Comparison operations “==“, “eq“, “!=“, “noteq“, “less“, “eless“, “great“ and “egreat“ (see List of operators)
+- Logical operations “and” and “or” (see List of operators)
+- Unary operations “!” and “not” (see List of operators)
+- Functions. List of functions and their descriptions, see List of functions. Note that Build Machine is - case-insensitive when comparing the names of the functions.
+- Variables (see Usage of Variables). Build Machine is case-insensitive when comparing the names of the variables.
 
 Usage of expressions is designed in such a way, that text is always the result of expression evaluation. Functions and operators of expressions always manipulate the text. However, some operations are trying to present the text as Boolean value. For example, function “isTrue(...)” returns the string “true”, if the argument of this function is same as one of the values (it isn't case-sensitive): 
-”true”
-”ok”
-”yes”
-”1”
+
+- ”true”
+- ”ok”
+- ”yes”
+- ”1”
+
 Otherwise ”isTrue(...)” returns the string “false”. Another similar function “isFalse(...)” returns the string “true” if the argument of this function is same as one of the values (it isn't case-sensitive):
 
-”false”
-”no”
-”0”
+- ”false”
+- ”no”
+- ”0”
+
 Otherwise “isFalse(...)“ returns the string “false”. Logical operators “and” and “or”,  unary operators “!” and “not” also operate with text as with “Boolean” value. 
 
 You can use other expressions (and functions) as function arguments, nesting depth is not limited.
@@ -950,35 +1272,79 @@ contains(getAllProjects(), 'MyProject5')
 
 
 10. List of standard tasks to build a script
+
 We will give a detailed description of “tasks” which can be used in the files with scripts (Job Files). Modifying the source code of Build Machine you can extent this list with new “tasks”.
+
 Note, that when processing some “tasks” use information about the projects, which are taken by Build Machine when scanning the source code directories.\
+
 “Tasks” can be placed only inside XML section with “tasks”. “Tasks” section can be situated inside “project” or “macrodef”.
+
 10.1 „MessageBox“ task
+
 Allows to display dialogue message box. Section name in XML file: “messagebox”.
 List of attributes:
+
+1.
 Name
-Description 
-Required
 message
+
+Description 
 Message text.
 Is empty, the window will not appear.
+
+Required
 no
+
+2.
+Name
 icon
+
+Description 
 Type of icon in the dialogue window (“info”, “warning”, “error”, “stop”)
+
+Required
 no
+
+3.
+Name
 comment
+
+Description 
 Comment
+
+Required
 no
+
+4.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+5.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be write into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+6.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Examples
@@ -987,28 +1353,62 @@ Examples
 <messagebox message="Hello" icon=”warning”/>
 <messagebox message="Hello" icon=”error”/>
 
+
 10.2 “Question” task
 Allows to display dialog window with question. Section name in XML file: “question”.
+
 List of attributes:
+
+1.
 Name
-Description 
-Required
 message
+
+Description
 Message text
+
+Required
 yes
+
+2.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+3.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+4.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be write into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+5.
+Name
 resultvar
+
+Description
 Name of variable. If the user clicks on “Yes” in the dialogue box, this variable will contain “true”, if the user clicks “No”, the variable will contain “false”.
+
+Required
 no
 
 Examples
@@ -1017,26 +1417,48 @@ Examples
 
 
 10.3 „Build” task
+
 Task to build the project.
 XML node name: “build”.
+
 List of attributes for “build” node:
+
+1.
 Name
-Description 
-Required
 name
+
+Description 
 Project name to build.
 Project name must coincide with the name of one of the projects, described in Build Project File (see Description / definition of projects for building).  
+
+Required
 yes
+
+2.
+Name
 configuration
+
+Description 
 Build configuration.
 For example, for “Visual Studio” it is: “release”, “debug”,...
 ”Release” by default.
+
+Required
 no
+
+3.
+Name
 target
+
+Description
 Build target.
 For example, for “Visual Studio” it is: “Build”, “rebuild”, “clean”,...
 By default: «build».
+
+Required
 no
+
+4.
 platform
 Build platform.
 For example, for “Visual Studio” it is: “x86“, “x64“, ....
