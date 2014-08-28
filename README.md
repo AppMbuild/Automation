@@ -1459,40 +1459,101 @@ Required
 no
 
 4.
+Name
 platform
+
+Description
 Build platform.
 For example, for “Visual Studio” it is: “x86“, “x64“, ....
 By default: «».
+
+Required
 no
+
+5.
+Name
 platformtoolset
+
+Description
 Build platform tool-set.
 For example, for “Visual Studio” it is:  “v90“, “v100“, “v110“, ....
 By default: «».
+
+Required
 no
+
+6.
+Name
 output
+
+Description
 Output folder.
+
+Required
 yes
+
+7.
+Name
 extraparam
+
+Description
 Additional command line, which will be given “as it is” to the executable.
 For example, for “Visual Studio” it will be given as “MSBuild.exe”.
+
+Required
 no
+
+8.
+Name
 skipbuild
+
+Description
 If the value is same as one of the following values: “true”, “ok”, “yes” or “1” the current project will not be built.
 Is “false” by default.
+
+Required
 no
+
+9.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+10.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+11.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+12.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Information, which Build Machine gets while scanning the directories with source code are needed to perform this task.
@@ -1504,6 +1565,7 @@ When building, Build Machine remembers all projects which it builds in order to 
 We'll recall that the list of resulting file for the project is defined in its description (Description / definition of projects for building). Several output files can be defines for one project. Moreover, resulting project files can be divided into groups (“fileset”), each of which can be marked with ID (“fileset ID”). All these files will be copied into the “output” after the project will be built.
 
 It is often necessary, that some dependable projects could copy their resulting files into the directories, different from “output” while building the project. To put this into realization it is necessary to use the following functionality.
+
 After building the project Build Machine tries to define the directory which will contain all resulting files. The algorithm of output directory detection is as follows:
 1. Directory of resulting files is “output”.
 2. “Build Machine“ checks if there is a variable with the following name: “<project name>.prefer.out.subdir“, so that the value of this variable is interpreted as subdirectory which will be created inside the “output” directory. The resulting project files will be copied exactly into this subdirectory. 
@@ -1517,43 +1579,99 @@ Examples
 
 <build name="Project_A" configuration="Release" target="Rebuild" output="d:\temp8" resultvar="${build.result}"/>
 
+
 10.4 “Libs” task
+
 Task for copying files of the project (which is not needed to be built) into specified directory.
 Node name: «libs».
+
 Attributes list for «libs»:
+
+1.
 Name
-Description 
-Required
 name
+
+Description
 Project name.
 Project name must coincide with the name of one of the projects, described with Build Project File (see Description / definition of projects for building).  . This project doesn't require building (“Files” type).
+
+Required
 yes
+
+2.
+Name
 configuration
+
+Description
 Build configuration.
 For example, for “Visual Studio” it is: “release”, “debug”,...
 ”Release” by default.
+
+Required
 no
+
+3.
+Name
 platform
+
+Description
 Build platform.
 For example, for “Visual Studio” it is: “x86“, “x64“, ....
 By default: «».
+
+Required
 no
+
+4.
+Name
 output
+
+Description
 Output folder
+
+Required
 yes
+
+5.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+6.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+7.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+8.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 The information collected by Build Machine after scanning the source code directories is needed to perform this task.
@@ -1589,8 +1707,11 @@ Examples:
     </tasks>
 </project>
 
+
 10.5 ”Exec” task
+
 Used for launching other applications. Node name: “exec”. 
+
 List of attributes of “exec”:
 Name
 Description 
