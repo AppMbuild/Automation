@@ -1713,57 +1713,142 @@ Examples:
 Used for launching other applications. Node name: “exec”. 
 
 List of attributes of “exec”:
+
+1.
 Name
-Description 
-Required
 exe
+
+Description 
 File path to execute
+
+Required
 yes
+
+2.
+Name
 dir
+
+Description
 The directory in which the command should be executed. Defaults not used.
+
+Required
 no
+
+3.
+Name
 waittime
+
+Description
 Time in  milliseconds to wait the process. Defaults to “1036800000” (12 days).
+
+Required
 no
+
+4.
+Name
 show
+
+Description
 Boolean value (“true” or “false”). Set "false" to hide the window of new process.
 Defaults to “true”.
+
+Required
 no
+
+5.
+Name
 catchoutput
+
+Description
 Boolean value (“true” or “false”). Set "false" to not print the output of new process into logs.
 Defaults to “true”.
+
+Required
 no
+
+6.
+Name
 output
+
+Description
 Name of a file to which to write the output. Defaults not used.
+
+Required
 no
+
+7.
+Name
 exitcodevar
+
+Description
 Name of a variable to which to write the exit code.
+
+Required
 no
+
+8.
+Name
 waitresultvar
+
+Description
 Name of a variable to which to write the waiting result («true» or «false»).
+
+Required
 no
+
+9.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+10.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+11.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+12.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Command line arguments should be specified as nested <arg> elements.
 Attributes list for ”arg”:
+
+
 Name
-Description 
-Required
 value
+
+Description
 Command line parameter
+
+Required
 no
 
 Examples:
@@ -1774,29 +1859,69 @@ Examples:
 
 10.6 ”System” task
 Execute a command. Node name: “system”. 
+
 List of attributes of “system”:
+
+1.
 Name
-Description 
-Required
 cmd
+
+Description
 Command to be executed
+
+Required
 yes
+
+2.
+Name
 exitcodevar
+
+Description
 Name of a variable to which to write the exit code.
+
+Required
 no
+
+3.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+4.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+5.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+6.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Examples:
@@ -1805,34 +1930,80 @@ Examples:
 
 10.7 ”SvnUpdate” task
 Is used to update the SVN repository. The name of the node is “svnupdate”.
+
 List of attributes for “svnupdate”:
+
+1.
 Name
-Description 
-Required
 path
+
+Description 
 Directory path.
-If not specified, the directory will be taken from ${svn.repository.dir} variable
+
+Required
 no
+
+2.
+Name
 revision
+
+Description 
 Number of revision, up to which it is needed to be updated.
+
+Required
 no
+
+3.
+Name
 tortoise
+
+Description
 If true, this task will be processed using “TortoiseProc.exe“ (for Windows OS).
 Is “false” by default.
+
+Required
 no
+
+4.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+5.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+6.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+7.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Examples:
@@ -1843,7 +2014,9 @@ Examples:
 
 10.8 “SvnCommit“ task
 Is used to commit all edits into SVN repository. Node's name: “svncommit”.
+
 «Svncommit” list of attributes:
+
 Name
 Description 
 Required
