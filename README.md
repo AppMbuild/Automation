@@ -2017,39 +2017,98 @@ Is used to commit all edits into SVN repository. Node's name: “svncommit”.
 
 «Svncommit” list of attributes:
 
+1.
 Name
-Description 
-Required
 path
+
+Description 
 Directory path.
 If not specified, the directory will be taken from ${svn.repository.dir} variable
+
+Required
 no
+
+2.
+Name
 message
+
+Description 
 Description for the commit
+
+Required
 no
+
+3.
+Name
 login
+
+Description 
 User's login for the SVN
+
+Required
 no
+
+4.
+Name
 password
+
+Description 
 User's password for the SVN
+
+Required
 no
+
+5.
+Name
 tortoise
+
+Description
 If true, this task will be processed using “TortoiseProc.exe“ (for Windows OS).
 Is “false” by default.
+
+Required
 no
+
+6.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+7.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+8.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+9.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Examples:
@@ -2058,31 +2117,71 @@ Examples:
 
 10.9 “SvnCleanup“ task
 Is used to clean up SVN repository. XML node name: “svncleanup”.
+
 List of attributes for “svncleanup”:
+
+1.
 Name
-Description 
-Required
 path
+
+Description 
 Directory path.
 If not specified, the directory will be taken from ${svn.repository.dir} variable
+
+Required
 no
+
+2.
+Name
 tortoise
+
+Description 
 If true, this task will be processed using “TortoiseProc.exe“ (for Windows OS).
 Is “false” by default.
+
+Required
 no
+
+3.
+Name
 comment
+
+Description 
 Comment
+
+Required
 no
+
+4.
+Name
 condition
+
+Description 
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+5.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+6.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Examples:
@@ -2092,39 +2191,99 @@ Examples:
 10.10 “SvnRevisionNum“ task
 Is used to get the latest SVN revision number. Node name: “svnrevisionnum”.
 List of attributes for “svnrevisionnum“:
+
+1.
 Name
-Description 
-Required
 url
+
+Description 
 URL repository or the path to repository directory.
 If not set, the sirectory will be taken from ${svn.repository.url} or ${svn.repository.dir}
+
+Required
 no
+
+2.
+Name
 valuevar
+
+Description 
 Name of variable, which will contain information about revision number.
+
+Required
 no
+
+3.
+Name
 login
+
+Description 
 User's login for the SVN
+
+Required
 no
+
+4.
+Name
 password
+
+Description
 User's password for the SVN
+
+Required
 no
+
+5.
+Name
 tortoise
+
+Description
 If true, this task will be processed using “TortoiseProc.exe“ (for Windows OS).
 Is “false” by default.
+
+Required
 no
+
+6.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+7.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+8.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+9.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Examples:
@@ -2133,35 +2292,82 @@ Examples:
 
 10.11 “SvnRevert” task
 Is used to revert changes in SVN repository. XML node name: “svnrevert”.
+
 List of attributes for “svnrevert”:
+
+1.
 Name
-Description 
-Required
 path
+
+Description 
 Directory path.
 If not specified, the directory will be taken from ${svn.repository.dir} variable
+
+Required
 no
+
+2.
+Name
 recursively
+
+Description
 If “true”, the changes in the folder will be marked recursively (fully).
 Is “false” by default.
+
+Required
 no
+
+3.
+Name
 tortoise
+
+Description
 If true, this task will be processed using “TortoiseProc.exe“ (for Windows OS).
 Is “false” by default.
+
+Required
 no
+
+4.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+5.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+6.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+7.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Examples:
@@ -2172,29 +2378,69 @@ Examples:
 Is used to get version number from the file.
 This task works only with two specific file formats (see “SetProjectVersion” task).
 XML node name: “versionfileread”.
+
 List of attributes for “versiofileread”:
+
+1.
 Name
-Description 
-Required
 file
+
+Description 
 Path to file with version
+
+Required
 yes
+
+2.
+Name
 valuevar
+
+Description 
 Name of variable, into which the version number will be placed from the file.
+
+Required
 no
+
+3.
+Name
 comment
+
+Description 
 Comment
+
+Required
 no
+
+4.
+Name
 condition
+
+Description 
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+5.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+6.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Example:
@@ -2204,36 +2450,81 @@ Example:
 10.13 “VersionFileWrite” task 
 Is used to update version number in the file.
 This task works only with two specific file formats (see “SetProjectVersion” task). XML node name: “versionfilewrite”.
+
 List of attributes for “versiofilewrite”:
 
+1.
 Name
-Description 
-Required
 file
-Path to file with version
-yes
-value
-Version number
-yes
-autostamp
-It is assumed, that version number has the following format: “<major>.<minor>.<release>.<timestamp>”, where “<timestamp>” has the following view: “<month><day>”. Commas can be used as separators.
 
+Description 
+Path to file with version
+
+Required
+yes
+
+2.
+Name
+value
+
+Description
+Version number
+
+Required
+yes
+
+3.
+Name
+autostamp
+
+Description
+It is assumed, that version number has the following format: “<major>.<minor>.<release>.<timestamp>”, where “<timestamp>” has the following view: “<month><day>”. Commas can be used as separators.
 If “true”, “timestamp” will be replaced in the version number. “Timestamp” is created according to the current date.
 Is “false” by default.
+
+Required
 no
+
+4.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+5.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+6.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+7.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Examples:
@@ -2269,36 +2560,88 @@ using System.Runtime.InteropServices;
 
 XML node name: “setprojectversion“.
 List of attributes for “setprojectversion“:
+
+1.
 Name
-Description 
-Required
 projectname
-Project name.
+
+Description 
 Project name must coincide with the name of one of the projects, described with Build Project File. (see Description / definition of projects for building).
+
+Required
 yes
+
+2.
+Name
 versionid
- “Version ID“  for the project.
+
+Description
+“Version ID“  for the project.
+
+Required
 no
+
+3.
+Name
 version
+
+Description
 Version number.
 See comments below.
+
+Required
 no
+
+4.
+Name
 autostamp
+
+Description
 (Not implemented)
+
+Required
 no
+
+5.
+Name
 comment
+
+Description
 Comment
+
+Required
 no
+
+6.
+Name
 condition
+
+Description
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+7.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+8.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 The information collected by Build Machine after scanning the source code directories is needed to perform this task.
 
@@ -2312,34 +2655,81 @@ Examples:
 
 10.15 “LoadProperties“ task
 Is used to load variables from Properties file. XML node name: “loadproperties”.
+
 List of attributes for “loadproperties”:
+
+1.
 Name
-Description 
-Required
 file
+
+Description 
 Path to Properties file, from which all global variables will be loaded.
+
+Required
 yes
+
+2.
+Name
 replace
+
+Description 
 If “true”, “yes”, “ok” or “1”, variables from the file will replace the already existing ones.
 Is “false” by default.
+
+Required
 no
+
+3.
+Name
 varprefix
+
+Description  
 Prefix, which will be added to the beginning of each variable's name, which will be loaded from the file.
 Is an empty string by default.
+
+Required
 no
+
+4.
+Name
 comment
+
+Description  
 Comment
+
+Required
 no
+
+5.
+Name
 condition
+
+Description  
 This is a condition for execution. Expressions (functions, variables, logic operators) can be used as condition text.
+
+Required
 no
+
+6.
+Name
 failonerror
+
+Description
 If “true” - when error appears during task performance other task execution will be interrupted.
 If “false” - the actual code of the error will be written into “resultvar” and the execution of other tasks will be continued even if this task will end up with a failure.
 Is “true” by default.
+
+Required
 no
+
+7.
+Name
 resultvar
+
+Description
 Name of variable. If the name of the variable is indicates, the variable with such name will contain error code ('0' if the task will be performed without mistakes).
+
+Required
 no
 
 Example:
