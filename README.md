@@ -4175,16 +4175,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+
 16. Source code
 Source code can be downloaded at http://appmiracle.com/appm-build-automation.
 Binar files can be downloaded at http://appmiracle.com/appm-build-automation/.
 Project has been built using Qt5, Visual Studio 2010 has been used as development environment. Programming language: C++.
 Currently the project is only Windows applicable (Windows XP/7/8).
 When using dialog box with dynamic contents (see “Dialog” task) it is necessary to keep “nbuilder_dlg.dll“ module near the executable. There are no other dependencies from external libraries/projects (except Qt5 and “nbuilder_dlg.dll“).
+
+
 17. Contact developers
 You can send your questions, bug reports and suggestions to the following address:
 pr@appmircale.com
 vlsk@outlook.com (developer)
+
+
 18. TO-DO
 Current project is fully operational.
 At the same time, the project may have flaws since some functionality hasn't been implemented yet (project has been developed by one specialist during a month).
